@@ -67,6 +67,22 @@ yarn build
 
 Contributions to the conservation package are welcome! Please see the contributing guidelines in the conservation directory.
 
+## Open Source Conservation Package
+
+The `conservation/` directory contains our open-source conservation tools, licensed under the AGPL-3.0 License. This package is automatically synced to a public repository at [github.com/Istionia/featherpause-conservation](https://github.com/Istionia/featherpause-conservation).
+
+### Why AGPL-3.0?
+
+We chose the AGPL-3.0 license for our conservation tools because:
+
+1. It ensures that any modifications to our conservation algorithms remain open source
+2. It closes the "SaaS loophole" by requiring source distribution when used in network services
+3. It aligns with our conservation ethics by ensuring transparency and community access
+
+### Contributions
+
+Contributions to the conservation package are welcome! You can contribute directly to the public repository or submit pull requests to this repository.
+
 ## License
 
 - The app directory is proprietary and closed-source.
