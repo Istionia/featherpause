@@ -92,4 +92,8 @@ This package is licensed under the [GNU Affero General Public License v3.0](LICE
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. 
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## GitHub Actions Sync
+
+This repository is automatically synchronized with the public [featherpause-conservation](https://github.com/Istionia/featherpause-conservation) repository through GitHub Actions. 
