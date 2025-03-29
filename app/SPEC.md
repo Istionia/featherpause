@@ -161,7 +161,7 @@ CREATE TABLE sightings (
 ### Functional Testing
 | **Area**              | **Test Cases**                              | **Tools**            |
 |-----------------------|---------------------------------------------|----------------------|
-| **AI Accuracy**       | Validate ID accuracy against Cornell’s Merlin test suite. | Custom scripts      |
+| **AI Accuracy**       | Validate ID accuracy against Cornell's Merlin test suite. | Custom scripts      |
 | **Offline Mode**      | Disable Wi-Fi/cellular; test logging/ID.    | Android ADB, Xcode  |
 | **Payment Flow**      | Test successful/failed subscriptions.       | Stripe Test Mode     |
 
@@ -203,27 +203,35 @@ CREATE TABLE sightings (
 4. Publish open-source modules on GitHub (AGPLv3).  
 
 **Repo Structure**:  
+```
 featherpause/
-├── closed/                      # Proprietary code (closed source)
-│   ├── app/                     # React Native frontend
-│   │   ├── components/          # Proprietary UI components
-│   │   ├── screens/             # App screens
-│   │   ├── navigation/          # Navigation configuration
-│   │   ├── services/            # Business logic and services
-│   │   ├── utils/               # Utility functions
-│   │   ├── hooks/               # Custom React hooks
-│   │   ├── contexts/            # React contexts
-│   │   ├── assets/              # Static assets
-│   │   └── types/               # TypeScript type definitions
-│   ├── api/                     # Supabase Edge Functions
-│   └── ml/                      # TensorFlow Lite models
-├── open/                        # Open-source code (AGPLv3)
-│   ├── conservation/            # GPS obfuscation, CoC tools
-│   │   ├── components/          # Conservation-related components
-│   │   ├── services/            # Conservation services
-│   │   └── utils/               # Conservation utilities
-│   └── ui-components/           # Community correction UIs
-│       ├── components/          # Open-source UI components  
-│       ├── hooks/               # Open-source hooks
-│       └── utils/               # Open-source utilities
-└── SPEC.md                      # Project specification
+├── app/                        # Main application (closed source)
+│   ├── src/                    # Application source code
+│   │   ├── components/         # UI components
+│   │   │   ├── common/         # Common UI components
+│   │   │   └── screens/        # Screen-specific components
+│   │   ├── screens/            # App screens
+│   │   ├── navigation/         # Navigation configuration
+│   │   ├── services/           # Business logic and services
+│   │   ├── utils/              # Utility functions
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── contexts/           # React contexts
+│   │   ├── theme/              # Theming and styling
+│   │   ├── assets/             # Static assets
+│   │   └── types/              # TypeScript type definitions
+│   ├── api/                    # Supabase Edge Functions
+│   ├── ml/                     # TensorFlow Lite models
+│   └── __tests__/              # Tests for app code
+│
+└── conservation/               # Open-source conservation package (AGPLv3)
+    ├── src/                    # Conservation package source code
+    │   ├── components/         # Conservation-related components
+    │   ├── services/           # Conservation services
+    │   ├── utils/              # Conservation utilities
+    │   │   └── data/           # Conservation data files
+    │   ├── obfuscation/        # GPS obfuscation algorithms
+    │   ├── status/             # Conservation status features
+    │   ├── constants/          # Shared constants
+    │   └── types/              # TypeScript type definitions
+    └── __tests__/              # Tests for conservation code
+```

@@ -39,11 +39,13 @@ Now, let's break these phases down into smaller, iterative chunks.
 ### Phase 1: Foundation & Core Architecture
 
 #### 1. Project Structure and Configuration (1 week)
-- Set up directory structure following repo structure in spec
-- Configure ESLint, TypeScript, and testing frameworks
+- Set up monorepo structure with app/ and conservation/ packages
+- Create clear separation between closed-source app and open-source conservation package
+- Configure ESLint, TypeScript, and testing frameworks for both packages
 - Set up environment variables and configuration management
 - Create basic CI/CD pipeline
 - Implement error tracking with Sentry
+- Set up GitHub Actions to sync conservation package to a public repository
 
 #### 2. UI Framework and Navigation (2 weeks)
 - Implement design system with brand colors and typography
