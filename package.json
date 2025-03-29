@@ -1,0 +1,20 @@
+{
+  "name": "featherpause",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "app",
+    "conservation"
+  ],
+  "scripts": {
+    "start": "yarn workspace app start",
+    "build": "yarn workspaces run build",
+    "test": "yarn workspaces run test",
+    "build:conservation": "yarn workspace conservation build",
+    "test:conservation": "yarn workspace conservation test",
+    "lint": "yarn workspaces run lint"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+} 
