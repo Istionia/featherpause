@@ -568,30 +568,36 @@ For the FeatherPause birding app, set up the project structure building on the e
 Requirements:
 1. Create the following directory structure:
    featherpause/
-├── closed/                      # Proprietary code (closed source)
-│   ├── app/                     # React Native frontend
-│   │   ├── components/          # Proprietary UI components
-│   │   ├── screens/             # App screens
-│   │   ├── navigation/          # Navigation configuration
-│   │   ├── services/            # Business logic and services
-│   │   ├── utils/               # Utility functions
-│   │   ├── hooks/               # Custom React hooks
-│   │   ├── contexts/            # React contexts
-│   │   ├── assets/              # Static assets
-│   │   └── types/               # TypeScript type definitions
-│   ├── api/                     # Supabase Edge Functions
-│   └── ml/                      # TensorFlow Lite models
-├── open/                        # Open-source code (AGPLv3)
-│   ├── conservation/            # GPS obfuscation, CoC tools
-│   │   ├── components/          # Conservation-related components
-│   │   ├── services/            # Conservation services
-│   │   └── utils/               # Conservation utilities
-│   └── ui-components/           # Community correction UIs
-│       ├── components/          # Open-source UI components  
-│       ├── hooks/               # Open-source hooks
-│       └── utils/               # Open-source utilities
-└── SPEC.md                      # Project specification
-   ```
+├── app/                        # Main application (closed source)
+│   ├── src/                    # Application source code
+│   │   ├── components/         # UI components
+│   │   │   ├── common/         # Common UI components
+│   │   │   └── screens/        # Screen-specific components
+│   │   ├── screens/            # App screens
+│   │   ├── navigation/         # Navigation configuration
+│   │   ├── services/           # Business logic and services
+│   │   ├── utils/              # Utility functions
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── contexts/           # React contexts
+│   │   ├── theme/              # Theming and styling
+│   │   ├── assets/             # Static assets
+│   │   └── types/              # TypeScript type definitions
+│   ├── api/                    # Supabase Edge Functions
+│   ├── ml/                     # TensorFlow Lite models
+│   └── __tests__/              # Tests for app code
+│
+└── conservation/               # Open-source conservation package (AGPLv3)
+    ├── src/                    # Conservation package source code
+    │   ├── components/         # Conservation-related components
+    │   ├── services/           # Conservation services
+    │   ├── utils/              # Conservation utilities
+    │   │   └── data/           # Conservation data files
+    │   ├── obfuscation/        # GPS obfuscation algorithms
+    │   ├── status/             # Conservation status features
+    │   ├── constants/          # Shared constants
+    │   └── types/              # TypeScript type definitions
+    └── __tests__/              # Tests for conservation code
+```
 
 2. Configure ESLint with React Native best practices
 3. Set up Prettier for consistent code formatting
