@@ -1,8 +1,14 @@
-# Welcome to your Expo app 👋
+# FeatherPause: AI-Driven Birding App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+FeatherPause is an AI-driven birding app for real-time bird identification via audio/visual inputs, emphasizing mindfulness and accessibility.
 
-## Get started
+## Project Structure
+
+This project uses a hybrid licensing approach:
+- Main app code (closed-source)
+- Conservation package (open-source, AGPLv3) - synced to https://github.com/Istionia/featherpause-conservation
+
+## Getting Started
 
 1. Install dependencies
 
@@ -13,38 +19,44 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+This will launch the Expo development server. You can run the app on:
+- iOS simulator
+- Android emulator
+- Physical device using Expo Go
+- Web browser
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Development
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+The app is built with:
+- React Native + Expo
+- TypeScript
+- Supabase for authentication and data storage
+- TensorFlow Lite for on-device AI processing
 
-## Get a fresh project
+### Conservation Package
 
-When you're ready, run:
+The conservation package contains open-source tools including:
+- GPS coordinate obfuscation for endangered species
+- Conservation status indicators
+- Tools for ethical wildlife observation
 
-```bash
-npm run reset-project
-```
+This package is automatically synced to a public GitHub repository through our CI/CD workflow.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Features
 
-## Learn more
+- **Bird Identification**: Real-time AI identification through photos or audio
+- **Sighting Logging**: Track and manage your bird sightings
+- **Educational Content**: Learn about different bird species
+- **Conservation Tools**: Ethical birding practices and endangered species protection
 
-To learn more about developing your project with Expo, look at the following resources:
+## Contributing
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Contributions to the conservation package are welcome! Please see the contributing guidelines in the conservation directory.
 
-## Join the community
+## License
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Main app: Proprietary
+- Conservation package: AGPLv3

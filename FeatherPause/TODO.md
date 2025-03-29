@@ -13,6 +13,9 @@
 - [x] Create README and initial documentation
 - [x] Set up Sentry for error tracking
 - [x] Configure type checking
+- [x] Migrate to Expo project structure
+- [x] Configure conservation package as local dependency
+- [x] Set up GitHub workflow for syncing conservation package
 
 ### Authentication System
 - [ ] Create user table in Supabase
