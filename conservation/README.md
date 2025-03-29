@@ -5,6 +5,7 @@ This package contains open-source conservation tools for the FeatherPause birdin
 - GPS coordinate obfuscation for endangered species
 - Conservation status indicators
 - Tools for ethical wildlife observation
+- Expo integration support
 
 ## Installation
 
