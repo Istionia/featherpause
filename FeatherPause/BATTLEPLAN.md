@@ -1,5 +1,13 @@
 # FeatherPause: AI Birding App Development Blueprint
 
+## Project Status Update
+
+### Completed: Expo Migration
+- Set up the project using Expo SDK 52 with the latest Expo Router
+- Migrated existing code to the Expo app structure
+- Configured the conservation package as a local dependency
+- Set up the GitHub Actions workflow to sync the conservation package to a public repository
+
 ## High-Level Development Blueprint
 
 ### Phase 1: Foundation & Core Architecture
@@ -560,72 +568,74 @@ Now that we have a detailed breakdown of the development steps, let's create a s
 
 ## LLM Code Generation Prompts
 
-### Prompt 1: Project Structure Setup
+### Prompt 1: Project Structure Enhancement
 
 ```
-For the FeatherPause birding app, set up the project structure building on the existing Expo project. The app needs a clean, organized directory structure based on the specification.
+For the FeatherPause birding app, enhance the existing Expo project structure that has been set up. You'll be building on the foundation we've already created, which includes:
+
+1. The existing project structure:
+   - FeatherPause/ (Main Expo application, closed source)
+     - app/ (Expo Router app directory)
+     - src/ (Additional application source code)
+     - components/ (Common UI components)
+     - assets/ (Static assets)
+     - etc.
+   - conservation/ (Open-source conservation package, AGPLv3)
+     - src/ (Conservation package source code)
+     - dist/ (Compiled JavaScript)
+
+2. Already implemented features:
+   - GitHub Actions workflow to sync conservation package to public repository
+   - Basic Expo Router setup with tab navigation
+   - Conservation package integration
+
+Requirements for enhancement:
+1. Create additional folders to fully organize the application:
+   - FeatherPause/src/services/ (Business logic and API calls)
+   - FeatherPause/src/hooks/ (Custom React hooks)
+   - FeatherPause/src/utils/ (Utility functions)
+   - FeatherPause/src/contexts/ (React contexts)
+
+2. Set up additional configurations:
+   - Enhanced ESLint with React Native best practices
+   - Complete TypeScript setup with strict type checking
+   - Jest configuration for testing with React Native Testing Library
+   - Sentry integration for error tracking
+
+3. Create boilerplate files:
+   - Basic error boundary component
+   - Service interfaces for major features
+   - Context providers for app state
+
+4. Implement existing interfaces:
+   - Create type definitions for conservation package integration
+   - Set up mock services for development
+
+Provide implementation of the missing elements while preserving the existing structure. Focus on enhancing what's already there rather than starting from scratch.
+```
+
+### Prompt 2: UI Theme Enhancement
+
+```
+For the FeatherPause app, implement the UI theme and core components based on the brand guidelines, building on our existing Expo structure. The app is already set up with Expo Router and tab navigation.
 
 Requirements:
-1. Create the following directory structure:
-   featherpause/
-├── app/                        # Main application (closed source)
-│   ├── src/                    # Application source code
-│   │   ├── components/         # UI components
-│   │   │   ├── common/         # Common UI components
-│   │   │   └── screens/        # Screen-specific components
-│   │   ├── screens/            # App screens
-│   │   ├── navigation/         # Navigation configuration
-│   │   ├── services/           # Business logic and services
-│   │   ├── utils/              # Utility functions
-│   │   ├── hooks/              # Custom React hooks
-│   │   ├── contexts/           # React contexts
-│   │   ├── theme/              # Theming and styling
-│   │   ├── assets/             # Static assets
-│   │   └── types/              # TypeScript type definitions
-│   ├── api/                    # Supabase Edge Functions
-│   ├── ml/                     # TensorFlow Lite models
-│   └── __tests__/              # Tests for app code
-│
-└── conservation/               # Open-source conservation package (AGPLv3)
-    ├── src/                    # Conservation package source code
-    │   ├── components/         # Conservation-related components
-    │   ├── services/           # Conservation services
-    │   ├── utils/              # Conservation utilities
-    │   │   └── data/           # Conservation data files
-    │   ├── obfuscation/        # GPS obfuscation algorithms
-    │   ├── status/             # Conservation status features
-    │   ├── constants/          # Shared constants
-    │   └── types/              # TypeScript type definitions
-    └── __tests__/              # Tests for conservation code
-```
-
-2. Configure ESLint with React Native best practices
-3. Set up Prettier for consistent code formatting
-4. Configure Jest for testing with React Native Testing Library
-5. Create TypeScript configuration with strict type checking
-6. Set up a basic error boundary component
-7. Create a README with project overview and setup instructions
-8. Configure Sentry for error tracking (provide just the setup, not implementation)
-
-Provide the necessary configuration files and folder structure creation commands. For any dependencies that need to be installed, include the exact npm/yarn commands.
-```
-
-### Prompt 2: UI Theme and Core Components
-
-```
-For the FeatherPause app, implement the UI theme and core components based on the brand guidelines. These components will serve as the foundation for the entire application UI.
-
-Requirements:
-1. Create a theme provider using the brand colors:
+1. Create a comprehensive theme provider using the brand colors:
    - Teal (#2F5D62)
    - Terracotta (#D36B00)
    - Lavender (#E6E6FA)
 
 2. Set up typography with Space Grotesk font:
-   - Configure Expo Font loading
+   - Configure font loading through our existing Expo setup
    - Create typography styles for different text variants
+   - Implement responsive text scaling
 
-3. Implement the following core components with appropriate variants:
+3. Build upon the existing navigation structure to implement:
+   - Consistent headers across all screens
+   - Tab bar styling matching the brand
+   - Animations and transitions between screens
+
+4. Implement the following core components with appropriate variants:
    - Button (primary, secondary, outline, text)
    - Input (text, number, password with show/hide toggle)
    - Card (for sightings, species info)
@@ -635,14 +645,22 @@ Requirements:
    - Spinner (loading indicator)
    - ErrorDisplay (for showing errors)
 
-4. Create a responsive layout system with:
+5. Create a responsive layout system with:
    - Container component for consistent padding
    - Grid system or flex utilities
    - Responsive spacing helpers
+   - Adaptations for different device sizes
 
-5. Write unit tests for all components using React Native Testing Library
+6. Implement dark mode support:
+   - Create dark theme variants of all colors
+   - Implement theme switching based on system preference
+   - Add manual theme toggle option
+
+7. Write unit tests for all components using React Native Testing Library
 
 Each component should be properly typed with TypeScript, include accessibility attributes, and follow the brand styling. Ensure components are exported from a central index file for easy imports.
+
+Note: Integrate with the existing Expo project structure, don't modify the tab navigation that's already been set up.
 ```
 
 ### Prompt 3: Navigation Structure
