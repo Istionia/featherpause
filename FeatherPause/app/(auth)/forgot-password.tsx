@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
@@ -7,6 +7,11 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function ForgotPasswordScreen() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
+
+  const goToLogin = () => {
+    router.navigate('../login');
+  };
 
   return (
     <View style={styles.container}>
@@ -36,11 +41,9 @@ export default function ForgotPasswordScreen() {
       </TouchableOpacity>
 
       <View style={styles.footer}>
-        <Link href="/(auth)/login" asChild>
-          <TouchableOpacity>
-            <Text style={{ color: Colors[colorScheme ?? 'light'].tint }}>Back to Sign In</Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity onPress={goToLogin}>
+          <Text style={{ color: Colors[colorScheme ?? 'light'].tint }}>Back to Sign In</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

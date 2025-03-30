@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import React, { useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
@@ -9,6 +9,15 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 export default function LoginScreen() {
   const colorScheme = useColorScheme();
   const { signIn } = useContext(AuthContext);
+  const router = useRouter();
+
+  const goToSignup = () => {
+    router.navigate('../signup');
+  };
+
+  const goToForgotPassword = () => {
+    router.navigate('../forgot-password');
+  };
 
   return (
     <View style={styles.container}>
@@ -49,21 +58,17 @@ export default function LoginScreen() {
       </TouchableOpacity>
 
       <View style={styles.links}>
-        <Link href="/(auth)/signup">
-          <TouchableOpacity>
-            <Text style={[styles.link, { color: Colors[colorScheme ?? 'light'].tint }]}>
-              Create Account
-            </Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity onPress={goToSignup}>
+          <Text style={[styles.link, { color: Colors[colorScheme ?? 'light'].tint }]}>
+            Create Account
+          </Text>
+        </TouchableOpacity>
 
-        <Link href="/(auth)/forgot-password">
-          <TouchableOpacity>
-            <Text style={[styles.link, { color: Colors[colorScheme ?? 'light'].tint }]}>
-              Forgot Password?
-            </Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity onPress={goToForgotPassword}>
+          <Text style={[styles.link, { color: Colors[colorScheme ?? 'light'].tint }]}>
+            Forgot Password?
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

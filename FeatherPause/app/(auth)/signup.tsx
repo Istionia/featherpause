@@ -1,4 +1,4 @@
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
@@ -7,6 +7,11 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function SignupScreen() {
   const colorScheme = useColorScheme();
+  const router = useRouter();
+
+  const goToLogin = () => {
+    router.navigate('../login');
+  };
 
   return (
     <View style={styles.container}>
@@ -54,11 +59,9 @@ export default function SignupScreen() {
 
       <View style={styles.footer}>
         <Text style={{ color: Colors[colorScheme ?? 'light'].text }}>Already have an account? </Text>
-        <Link href="/(auth)/login" asChild>
-          <TouchableOpacity>
-            <Text style={{ color: Colors[colorScheme ?? 'light'].tint }}>Sign In</Text>
-          </TouchableOpacity>
-        </Link>
+        <TouchableOpacity onPress={goToLogin}>
+          <Text style={{ color: Colors[colorScheme ?? 'light'].tint }}>Sign In</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
