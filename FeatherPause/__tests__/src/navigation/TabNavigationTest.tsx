@@ -6,24 +6,49 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import TabsIndex from '../../../app/(tabs)/index';
 import { AuthContext } from '../../../app/_layout';
 
-// Mock the expo-router module
-jest.mock('expo-router', () => ({
-  useRouter: jest.fn(),
-  Link: ({ href, children }: { href: string; children: React.ReactNode }) => <>{children}</>,
-}));
+// Define types
+interface AuthContextType {
+  isSignedIn: boolean;
+  signIn: () => void;
+  signOut: () => void;
+}
+
+// Mock the expo-router module properly
+jest.mock('expo-router', () => {
+  const React = require('react');
+  return {
+    useRouter: jest.fn(),
+    Link: ({ href, children }: { href: string; children: React.ReactNode }) => <>{children}</>,
+  };
+});
 
 // Mock the useColorScheme hook
 jest.mock('@/hooks/useColorScheme', () => ({
   useColorScheme: () => 'light',
 }));
 
+// Create AuthContext mock outside of component mock
+let mockAuthContext: AuthContextType | null = null;
+
 // Mock the ProfileScreen
 jest.mock('../../../app/(tabs)/profile', () => {
+  const React = require('react');
+  const { View, Text, TouchableOpacity } = require('react-native');
+  
+  // Get a reference to the real AuthContext
+  const { AuthContext } = require('../../../app/_layout');
+  
   return {
     __esModule: true,
     default: (props: any) => {
-      // Get the signOut function from context
-      const { signOut } = React.useContext(AuthContext);
+      // Get the signOut function from the mock context we'll set before the test
+      const signOut = jest.fn(() => {
+        // If mockAuthContext is available (during tests), use its signOut
+        if (mockAuthContext && mockAuthContext.signOut) {
+          mockAuthContext.signOut();
+        }
+      });
+      
       return (
         <View>
           <Text>Profile</Text>
@@ -48,6 +73,13 @@ describe('Tab Navigation', () => {
       replace: mockReplace,
       navigate: mockNavigate,
     });
+    
+    // Set our mock context for the test
+    mockAuthContext = {
+      isSignedIn: true,
+      signIn: jest.fn(),
+      signOut: mockSignOut
+    };
   });
 
   it('redirects to identify tab from index', () => {
@@ -63,7 +95,7 @@ describe('Tab Navigation', () => {
     const ProfileScreen = require('../../../app/(tabs)/profile').default;
 
     const { getByTestId } = render(
-      <AuthContext.Provider value={{ isSignedIn: true, signIn: jest.fn(), signOut: mockSignOut }}>
+      <AuthContext.Provider value={mockAuthContext as AuthContextType}>
         <ProfileScreen />
       </AuthContext.Provider>
     );

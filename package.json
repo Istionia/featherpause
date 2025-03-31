@@ -7,12 +7,12 @@
     "conservation"
   ],
   "scripts": {
-    "start": "yarn workspace app start",
-    "build": "yarn workspaces run build",
-    "test": "yarn workspaces run test",
-    "build:conservation": "yarn workspace conservation build",
-    "test:conservation": "yarn workspace conservation test",
-    "lint": "yarn workspaces run lint"
+    "start": "cd FeatherPause && npm start",
+    "build": "cd FeatherPause && npm run build",
+    "test": "cd FeatherPause && npm test",
+    "build:conservation": "cd conservation && npm run build",
+    "test:conservation": "cd conservation && npm test",
+    "lint": "cd FeatherPause && npm run lint"
   },
   "devDependencies": {
     "lerna": "^4.0.0"

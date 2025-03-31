@@ -1,17 +1,22 @@
 import React from 'react';
-import { render, act } from '@testing-library/react-native';
+import { render, act, fireEvent } from '@testing-library/react-native';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 import { AuthContext } from '../../../app/_layout';
 
-// Mock the expo-router module
-jest.mock('expo-router', () => ({
-  Stack: {
-    Screen: ({ name, children }: { name: string; children?: React.ReactNode }) => (
-      <View testID={`screen-${name}`}>{children}</View>
-    ),
-  },
-}));
+// Import React within the mock factory
+jest.mock('expo-router', () => {
+  const React = require('react');
+  const { View } = require('react-native');
+  
+  return {
+    Stack: {
+      Screen: ({ name, children }: { name: string; children?: React.ReactNode }) => (
+        <View testID={`screen-${name}`}>{children}</View>
+      ),
+    },
+  };
+});
 
 // Mock expo-font
 jest.mock('expo-font', () => ({
@@ -29,20 +34,27 @@ jest.mock('@/hooks/useColorScheme', () => ({
   useColorScheme: () => 'light',
 }));
 
-// Mock ThemeProvider
-jest.mock('@react-navigation/native', () => ({
-  ThemeProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
-}));
+// Mock ThemeProvider with proper imports
+jest.mock('@react-navigation/native', () => {
+  const React = require('react');
+  
+  return {
+    ThemeProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  };
+});
 
 // Mock the RootLayout component
 jest.mock('../../../app/_layout', () => {
+  const React = require('react');
+  const { View } = require('react-native');
   const originalModule = jest.requireActual('../../../app/_layout');
+  
   return {
     ...originalModule,
     default: ({ children }: { children: React.ReactNode }) => <>{children}</>,
     AuthContext: {
       Provider: ({ children, value }: { children: React.ReactNode; value: any }) => (
-        <div data-testid={`auth-${value.isSignedIn ? 'signed-in' : 'signed-out'}`}>{children}</div>
+        <View testID={`auth-${value.isSignedIn ? 'signed-in' : 'signed-out'}`}>{children}</View>
       ),
       Consumer: originalModule.AuthContext.Consumer,
     },
@@ -82,9 +94,7 @@ describe('Main Navigation Structure', () => {
       </View>
     );
     
-    act(() => {
-      getByTestId('sign-in-button').props.onPress();
-    });
+    fireEvent.press(getByTestId('sign-in-button'));
     
     expect(mockSignIn).toHaveBeenCalled();
   });
