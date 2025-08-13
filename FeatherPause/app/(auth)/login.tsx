@@ -1,120 +1,107 @@
 import { useRouter } from 'expo-router';
-import React, { useContext } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React, { useContext, useState } from 'react';
 
 import { AuthContext } from '../_layout';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {
+  SafeAreaView,
+  VStack,
+  HStack,
+  Heading,
+  Text,
+  Button,
+  ButtonText,
+  Box,
+  FeatherInput,
+  FeatherButton,
+  FeatherIcon,
+} from '@/src/components/ui';
 
 export default function LoginScreen() {
-  const colorScheme = useColorScheme();
   const { signIn } = useContext(AuthContext);
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const goToSignup = () => {
-    router.navigate('../signup');
+    router.navigate('./signup');
   };
 
   const goToForgotPassword = () => {
-    router.navigate('../forgot-password');
+    router.navigate('./forgot-password');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { color: Colors[colorScheme ?? 'light'].text }]}>
-        FeatherPause
-      </Text>
-      <Text style={[styles.subtitle, { color: Colors[colorScheme ?? 'light'].text }]}>
-        Bird Identification & Conservation
-      </Text>
+    <SafeAreaView flex={1} bg="$backgroundLight0">
+      <Box flex={1} justifyContent="center" px="$6">
+        <VStack space="xl" alignItems="center">
+          {/* Logo/Branding */}
+          <VStack space="md" alignItems="center" mb="$8">
+            <Box p="$4" bg="$primary100" borderRadius="$full">
+              <FeatherIcon name="bird" size="2xl" color="$primary600" />
+            </Box>
+            <Heading size="2xl" color="$primary700" textAlign="center">
+              FeatherPause
+            </Heading>
+            <Text 
+              size="md" 
+              color="$textLight600" 
+              textAlign="center"
+              maxWidth="$80"
+            >
+              Bird Identification & Conservation
+            </Text>
+          </VStack>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: Colors[colorScheme ?? 'light'].background },
-            { color: Colors[colorScheme ?? 'light'].text },
-          ]}
-          placeholder="Email"
-          placeholderTextColor="#A0A0A0"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: Colors[colorScheme ?? 'light'].background },
-            { color: Colors[colorScheme ?? 'light'].text },
-          ]}
-          placeholder="Password"
-          placeholderTextColor="#A0A0A0"
-          secureTextEntry
-        />
-      </View>
+          {/* Login Form */}
+          <VStack space="lg" width="$full">
+            <FeatherInput
+              label="Email"
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={setEmail}
+              type="email"
+              leftIcon={<FeatherIcon name="email" size="sm" color="$textLight500" />}
+              isRequired
+            />
 
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].tint }]}
-        onPress={signIn}>
-        <Text style={styles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
+            <FeatherInput
+              label="Password"
+              placeholder="Enter your password"
+              value={password}
+              onChangeText={setPassword}
+              type="password"
+              leftIcon={<FeatherIcon name="lock" size="sm" color="$textLight500" />}
+              isRequired
+            />
 
-      <View style={styles.links}>
-        <TouchableOpacity onPress={goToSignup}>
-          <Text style={[styles.link, { color: Colors[colorScheme ?? 'light'].tint }]}>
-            Create Account
-          </Text>
-        </TouchableOpacity>
+            <FeatherButton
+              variant="primary"
+              size="lg"
+              onPress={signIn}
+              mt="$4"
+            >
+              Sign In
+            </FeatherButton>
+          </VStack>
 
-        <TouchableOpacity onPress={goToForgotPassword}>
-          <Text style={[styles.link, { color: Colors[colorScheme ?? 'light'].tint }]}>
-            Forgot Password?
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          {/* Links */}
+          <HStack space="lg" justifyContent="center" mt="$6">
+            <Button variant="link" onPress={goToSignup}>
+              <ButtonText color="$primary600" size="sm">
+                Create Account
+              </ButtonText>
+            </Button>
+
+            <Text color="$textLight400" size="sm">•</Text>
+
+            <Button variant="link" onPress={goToForgotPassword}>
+              <ButtonText color="$primary600" size="sm">
+                Forgot Password?
+              </ButtonText>
+            </Button>
+          </HStack>
+        </VStack>
+      </Box>
+    </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 40,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  input: {
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 15,
-  },
-  button: {
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  links: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  link: {
-    fontSize: 14,
-  },
-}); 
+} 

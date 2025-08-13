@@ -1,19 +1,14 @@
 import { Stack } from 'expo-router';
 import React from 'react';
 
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
 export default function AuthLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Stack
       screenOptions={{
         headerStyle: {
-          backgroundColor: Colors[colorScheme ?? 'light'].background,
+          backgroundColor: '#FFFFFF',
         },
-        headerTintColor: Colors[colorScheme ?? 'light'].tint,
+        headerTintColor: '#2F5D62', // FeatherPause teal
         headerTitleStyle: {
           fontWeight: 'bold',
         },

@@ -47,6 +47,14 @@ export {
   SliderThumb,
 } from '@gluestack-ui/themed';
 
-// Export our custom components
+// Export our custom FeatherPause components
 export { FeatherCard } from './FeatherCard';
+export { FeatherButton } from './FeatherButton';
+export { FeatherInput } from './FeatherInput';
+export { FeatherSpinner, FeatherSkeleton } from './FeatherSpinner';
+export { FeatherAlert, FeatherErrorBoundary } from './FeatherAlert';
+export { FeatherIcon, FeatherIconButton, FEATHER_ICONS } from './FeatherIcon';
+
+// Export types
 export type { default as FeatherCardProps } from './FeatherCard';
+export type { FeatherIconName } from './FeatherIcon';
