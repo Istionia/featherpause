@@ -56,11 +56,12 @@ Now, let's break these phases down into smaller, iterative chunks.
 - Set up GitHub Actions to sync conservation package to a public repository
 
 #### 2. UI Framework and Navigation (2 weeks)
-- Implement design system with brand colors and typography
-- Create core UI components (buttons, inputs, cards)
+- Set up Gluestack UI v2 as the primary UI library
+- Configure Gluestack UI v2 theme with brand colors and typography
+- Customize Gluestack UI v2 components to match design requirements
 - Set up React Navigation with tab structure
 - Create placeholder screens for main sections
-- Implement responsive layouts and theming
+- Implement responsive layouts using Gluestack UI v2 system
 
 #### 3. Authentication System (1 week)
 - Set up Supabase authentication
@@ -206,25 +207,26 @@ Now, let's break these down into more detailed steps that are appropriately size
 2. Set up ESLint and Prettier configuration
 3. Configure TypeScript with appropriate settings
 4. Set up Jest for testing with React Native Testing Library
-5. Create GitHub Actions workflow for CI/CD
-6. Set up environment variable management
-7. Configure Sentry for error tracking
-8. Create comprehensive README with setup instructions
-9. Implement error boundary components
-10. Set up versioning strategy
+5. Install and configure Gluestack UI v2 dependencies
+6. Create GitHub Actions workflow for CI/CD
+7. Set up environment variable management
+8. Configure Sentry for error tracking
+9. Create comprehensive README with setup instructions including Gluestack UI v2
+10. Implement error boundary components using Gluestack Alert components
+11. Set up versioning strategy
 
-### Phase 1B: UI Framework & Core Components
+### Phase 1B: UI Framework & Gluestack UI v2 Setup
 
-1. Create theme provider with brand colors
-2. Set up typography with Space Grotesk font
-3. Build button component with variants
-4. Create input components with validation
-5. Implement card and list item components
-6. Build loading and error state components
-7. Create icon system with common icons
-8. Implement responsive layout utilities
-9. Build form components and validation
-10. Create unit tests for all core components
+1. Install and configure Gluestack UI v2 dependencies
+2. Set up Gluestack UI v2 theme provider with brand colors
+3. Configure typography with Space Grotesk font in Gluestack theme
+4. Customize Gluestack button components with app-specific variants
+5. Configure Gluestack input components with validation styling
+6. Customize Gluestack card and list components for app needs
+7. Set up Gluestack loading and error state components
+8. Configure Gluestack icon system with app-specific icons
+9. Implement responsive layouts using Gluestack's responsive system
+10. Create unit tests for customized Gluestack components
 
 ### Phase 1C: Navigation Structure
 
@@ -371,7 +373,7 @@ Now, let's break these down into more detailed steps that are appropriately size
 
 ### Phase 3A: TensorFlow Lite Setup
 
-1. Add TensorFlow Lite dependencies
+1. Add TensorFlow Lite and Gluestack UI v2 dependencies
 2. Create model loading utilities
 3. Implement image preprocessing
 4. Build inference wrapper for images
@@ -600,6 +602,7 @@ Requirements for enhancement:
    - Enhanced ESLint with React Native best practices
    - Complete TypeScript setup with strict type checking
    - Jest configuration for testing with React Native Testing Library
+   - Gluestack UI v2 installation and initial configuration
    - Sentry integration for error tracking
 
 3. Create boilerplate files:
@@ -610,8 +613,17 @@ Requirements for enhancement:
 4. Implement existing interfaces:
    - Create type definitions for conservation package integration
    - Set up mock services for development
+   - Configure Gluestack UI v2 theme provider at app root
+   - Create initial Gluestack theme configuration with brand colors
 
-Provide implementation of the missing elements while preserving the existing structure. Focus on enhancing what's already there rather than starting from scratch.
+Provide implementation of the missing elements while preserving the existing structure. Focus on enhancing what's already there rather than starting from scratch. Prioritize setting up Gluestack UI v2 as the foundation for all UI components.
+
+Important: Install Gluestack UI v2 using:
+```bash
+npm install @gluestack-ui/themed @gluestack-ui/components @gluestack-style/react
+```
+
+Configure the theme provider and basic setup before proceeding with other components.
 ```
 
 ### Prompt 2: UI Theme Enhancement
@@ -620,47 +632,50 @@ Provide implementation of the missing elements while preserving the existing str
 For the FeatherPause app, implement the UI theme and core components based on the brand guidelines, building on our existing Expo structure. The app is already set up with Expo Router and tab navigation.
 
 Requirements:
-1. Create a comprehensive theme provider using the brand colors:
-   - Teal (#2F5D62)
-   - Terracotta (#D36B00)
-   - Lavender (#E6E6FA)
+1. Set up Gluestack UI v2 with custom theme configuration:
+   - Install Gluestack UI v2 and its dependencies
+   - Configure brand colors in Gluestack theme:
+     - Teal (#2F5D62)
+     - Terracotta (#D36B00)
+     - Lavender (#E6E6FA)
+   - Set up theme provider at app root
 
-2. Set up typography with Space Grotesk font:
-   - Configure font loading through our existing Expo setup
-   - Create typography styles for different text variants
-   - Implement responsive text scaling
+2. Configure typography with Space Grotesk font:
+   - Add Space Grotesk to Gluestack typography tokens
+   - Configure font loading through existing Expo setup
+   - Set up responsive text scaling using Gluestack's system
 
 3. Build upon the existing navigation structure to implement:
-   - Consistent headers across all screens
-   - Tab bar styling matching the brand
-   - Animations and transitions between screens
+   - Consistent headers using Gluestack Header components
+   - Tab bar styling using Gluestack theme tokens
+   - Animations and transitions using Gluestack's motion system
 
-4. Implement the following core components with appropriate variants:
-   - Button (primary, secondary, outline, text)
-   - Input (text, number, password with show/hide toggle)
-   - Card (for sightings, species info)
-   - ListItem (for sightings list)
-   - IconButton (for actions)
-   - Badge (for conservation status, etc.)
-   - Spinner (loading indicator)
-   - ErrorDisplay (for showing errors)
+4. Customize Gluestack UI v2 components for app needs:
+   - Button (customize primary, secondary, outline, text variants)
+   - Input (configure text, number, password with show/hide toggle)
+   - Card (style for sightings and species info display)
+   - ListItem (customize for sightings list layout)
+   - IconButton (configure for app-specific actions)
+   - Badge (style for conservation status indicators)
+   - Spinner (customize loading indicator appearance)
+   - Alert (configure for error display)
 
-5. Create a responsive layout system with:
-   - Container component for consistent padding
-   - Grid system or flex utilities
-   - Responsive spacing helpers
-   - Adaptations for different device sizes
+5. Utilize Gluestack's responsive layout system:
+   - Use Gluestack Box and Container components
+   - Leverage Gluestack's responsive props system
+   - Configure spacing using Gluestack spacing tokens
+   - Implement responsive breakpoints for different devices
 
-6. Implement dark mode support:
-   - Create dark theme variants of all colors
-   - Implement theme switching based on system preference
-   - Add manual theme toggle option
+6. Implement dark mode using Gluestack's theme system:
+   - Configure dark theme variants in Gluestack config
+   - Implement theme switching using Gluestack's ColorMode
+   - Add manual theme toggle using Gluestack components
 
-7. Write unit tests for all components using React Native Testing Library
+7. Write unit tests for customized components using React Native Testing Library
 
-Each component should be properly typed with TypeScript, include accessibility attributes, and follow the brand styling. Ensure components are exported from a central index file for easy imports.
+All Gluestack UI v2 components should be properly customized with TypeScript, include accessibility attributes (which Gluestack provides by default), and follow the brand styling through the theme configuration. Ensure customized components are exported from a central index file for easy imports.
 
-Note: Integrate with the existing Expo project structure, don't modify the tab navigation that's already been set up.
+Note: Integrate with the existing Expo project structure, don't modify the tab navigation that's already been set up. Use Gluestack UI v2 as the foundation rather than building custom components from scratch.
 ```
 
 ### Prompt 3: Navigation Structure
@@ -1014,10 +1029,10 @@ The Identify screen should provide a seamless experience regardless of which ide
 ### Prompt 10: Size Comparison Slider
 
 ```
-For the FeatherPause app, implement the Size Comparison Slider component as specified in the requirements. This will help users understand the relative size of identified birds.
+For the FeatherPause app, implement the Size Comparison Slider component using Gluestack UI v2 components as the foundation. This will help users understand the relative size of identified birds.
 
 Requirements:
-1. Create a SizeSlider component that visualizes the size tiers:
+1. Create a SizeSlider component using Gluestack UI v2 Slider and related components:
    - House Sparrow (15 cm)
    - Barn Swallow (17 cm)
    - Rock Pigeon (32 cm)
@@ -1025,11 +1040,11 @@ Requirements:
    - Great Egret (100 cm)
    - Mute Swan (150 cm)
 
-2. Implement the slider with:
-   - Proportional visual representation of sizes
-   - Clear labeling of each reference bird
-   - Current selection indicator
-   - Smooth transitions between selections
+2. Customize the Gluestack Slider component with:
+   - Proportional visual representation of sizes using Gluestack styling
+   - Clear labeling using Gluestack Text components
+   - Current selection indicator using Gluestack Badge or similar
+   - Smooth transitions leveraging Gluestack's animation system
 
 3. Build interactive functionality:
    - Allow sliding between different sizes
@@ -1071,10 +1086,10 @@ The Size Comparison Slider should be visually appealing while providing valuable
 ### Prompt 11: Sighting Form Implementation
 
 ```
-For the FeatherPause app, implement the sighting form that allows users to log bird observations. This form will be used both for manual entries and for saving identifications from the Identify screen.
+For the FeatherPause app, implement the sighting form using Gluestack UI v2 form components. This form will be used both for manual entries and for saving identifications from the Identify screen.
 
 Requirements:
-1. Create a SightingForm component with fields for:
+1. Create a SightingForm component using Gluestack UI v2 form components with fields for:
    - Bird species (searchable selection)
    - Date and time (with date/time picker)
    - Location (GPS coordinates with map preview)
@@ -1088,18 +1103,17 @@ Requirements:
    - Date/time validation (no future dates)
    - File type and size validation for attachments
 
-3. Build a species selection component:
-   - Searchable dropdown of bird species
-   - Recent/common species quick selection
-   - Recent/common species quick selection
-   - Grouping by taxonomy or habitat
-   - Indicators for conservation status
+3. Build a species selection component using Gluestack Select:
+   - Searchable dropdown using Gluestack Select component
+   - Recent/common species quick selection with Gluestack ActionsheetItem
+   - Grouping by taxonomy or habitat using Gluestack Divider
+   - Conservation status indicators using Gluestack Badge components
 
-4. Create a location picker component:
-   - Current GPS location with accuracy indicator
-   - Manual map selection alternative
-   - Reverse geocoding for location names
-   - Recent locations quick selection
+4. Create a location picker component using Gluestack components:
+   - Current GPS location display using Gluestack Box and Text
+   - Manual map selection with Gluestack Modal integration
+   - Location names display using Gluestack Input with suggestions
+   - Recent locations using Gluestack Actionsheet
 
 5. Implement media attachment handling:
    - Photo thumbnail previews
@@ -1137,12 +1151,12 @@ The sighting form should be intuitive and efficient, guiding users through the p
 ### Prompt 12: Logbook Implementation
 
 ```
-For the FeatherPause app, implement the Logbook screen that displays the user's bird sightings with filtering, search, and detail view functionality.
+For the FeatherPause app, implement the Logbook screen using Gluestack UI v2 components for displaying bird sightings with filtering, search, and detail functionality.
 
 Requirements:
-1. Create a Logbook screen with two view options:
-   - Grid view with photo thumbnails
-   - List view with more detailed information
+1. Create a Logbook screen using Gluestack layout components with two view options:
+   - Grid view using Gluestack Grid with photo thumbnails
+   - List view using Gluestack VStack with detailed information
 
 2. Implement filtering capabilities:
    - Date range selection (calendar picker)
@@ -1156,21 +1170,21 @@ Requirements:
    - Search suggestions as you type
    - Clear search button
 
-4. Create a SightingListItem component:
-   - Display species name
-   - Show date, time, and location
-   - Include thumbnail of primary photo if available
-   - Add conservation status indicator
-   - Show sync status (synced/pending)
+4. Create a SightingListItem component using Gluestack components:
+   - Display species name using Gluestack Heading
+   - Show date, time, and location using Gluestack Text
+   - Include thumbnail using Gluestack Image with fallback
+   - Add conservation status using Gluestack Badge
+   - Show sync status using Gluestack Icon with appropriate colors
 
-5. Implement a SightingDetail screen:
-   - Full species information
-   - All sighting details (date, time, location)
-   - Map view of location
-   - Gallery of all attached photos
-   - Audio playback for recordings
-   - Edit and delete options
-   - Share functionality
+5. Implement a SightingDetail screen using Gluestack components:
+   - Full species information using Gluestack Card and Text
+   - All sighting details using Gluestack VStack layout
+   - Map view integration with Gluestack Box container
+   - Gallery using Gluestack HStack with Image components
+   - Audio playback with Gluestack Button and progress indicators
+   - Edit and delete options using Gluestack ActionsheetItem
+   - Share functionality using Gluestack Modal
 
 6. Build sorting options:
    - Newest first (default)
@@ -1433,22 +1447,22 @@ Ensure the eBird integration enhances the app experience without becoming a crit
 ### Prompt 17: Learn Screen and Educational Content
 
 ```
-For the FeatherPause app, implement the Learn screen with educational content about birds, species guides, and birding tips.
+For the FeatherPause app, implement the Learn screen using Gluestack UI v2 components for educational content about birds, species guides, and birding tips.
 
 Requirements:
-1. Create a Learn screen with sections for:
+1. Create a Learn screen using Gluestack layout components with sections for:
    - Species guides (browsable catalog)
    - Birding tips and techniques
    - Conservation information
    - Quizzes and learning activities
 
-2. Implement a species guide component:
-   - Searchable species database
-   - Detailed species information pages
-   - High-quality images with field marks highlighted
-   - Audio samples of calls when available
-   - Range maps and habitat information
-   - Conservation status and trends
+2. Implement a species guide component using Gluestack components:
+   - Searchable species database using Gluestack Input with filtering
+   - Detailed species pages using Gluestack ScrollView and Card layouts
+   - High-quality images with Gluestack Image and overlay components
+   - Audio samples with Gluestack Button and progress components
+   - Range maps using Gluestack Box containers for map integration
+   - Conservation status using Gluestack Badge and Alert components
 
 3. Build a "Bird of the Day" feature:
    - Daily rotating featured species
@@ -1493,7 +1507,7 @@ The Learn screen should be engaging and educational, providing value to birders 
 ### Prompt 18: Subscription and Payment Processing
 
 ```
-For the FeatherPause app, implement the subscription system using Stripe and RevenueCat for the $6.99/month subscription-only model.
+For the FeatherPause app, implement the subscription system using Gluestack UI v2 components with Stripe and RevenueCat for the $6.99/month subscription-only model.
 
 Requirements:
 1. Set up Stripe integration:
@@ -1508,17 +1522,17 @@ Requirements:
    - Create entitlement checking service
    - Implement receipt validation
 
-3. Build subscription UI:
-   - Create subscription screen with benefits explanation
-   - Implement payment form with Stripe Elements
-   - Build subscription success confirmation
-   - Create loading and error states
+3. Build subscription UI using Gluestack components:
+   - Create subscription screen using Gluestack Card and VStack layouts
+   - Implement payment form with Stripe Elements wrapped in Gluestack components
+   - Build subscription success confirmation using Gluestack Alert
+   - Create loading states with Gluestack Spinner and error states with Gluestack Alert
 
-4. Implement subscription management:
-   - Show current subscription status
-   - Allow updating payment method
-   - Enable cancellation workflow
-   - Add subscription renewal information
+4. Implement subscription management using Gluestack components:
+   - Show current subscription status using Gluestack Badge and Card
+   - Allow updating payment method with Gluestack Modal and form components
+   - Enable cancellation workflow using Gluestack Actionsheet
+   - Add subscription renewal information using Gluestack Text and InfoOutlineIcon
 
 5. Create entitlement checking system:
    - Verify subscription status for features
@@ -1550,20 +1564,20 @@ The subscription system should be seamless and transparent, clearly communicatin
 ### Prompt 19: Accessibility Implementation
 
 ```
-For the FeatherPause app, implement comprehensive accessibility features to ensure the app is usable by people with various disabilities, following WCAG 2.1 standards.
+For the FeatherPause app, implement comprehensive accessibility features building on Gluestack UI v2's built-in accessibility support to ensure WCAG 2.1 compliance.
 
 Requirements:
-1. Implement screen reader support:
-   - Add proper accessibility labels to all components
-   - Create meaningful descriptions for images and icons
-   - Ensure logical navigation order
-   - Add announcements for state changes
+1. Enhance Gluestack's built-in screen reader support:
+   - Customize accessibility labels on Gluestack components where needed
+   - Add meaningful descriptions for custom images and icons
+   - Leverage Gluestack's logical navigation order
+   - Use Gluestack's announcement system for state changes
 
-2. Create high contrast mode:
-   - Implement alternative color scheme with 7:1 contrast ratio
-   - Ensure text legibility on all backgrounds
-   - Add border indicators for interactive elements
-   - Create testing utilities for contrast checking
+2. Extend Gluestack's theming for high contrast mode:
+   - Configure alternative color tokens in Gluestack theme with 7:1 contrast
+   - Ensure text legibility using Gluestack's color mode system
+   - Use Gluestack's focus and interaction states for borders
+   - Create contrast testing utilities for Gluestack theme tokens
 
 3. Implement dynamic font scaling:
    - Support system font size settings up to 200%
@@ -1607,14 +1621,14 @@ The accessibility implementation should be thorough and integrated throughout th
 ### Prompt 20: Performance Optimization
 
 ```
-For the FeatherPause app, implement performance optimizations to ensure the app runs smoothly on a wide range of devices, paying special attention to startup time and resource usage.
+For the FeatherPause app, implement performance optimizations to ensure the app runs smoothly on a wide range of devices, paying special attention to startup time and resource usage with Gluestack UI v2.
 
 Requirements:
 1. Optimize app startup time:
-   - Implement code splitting and lazy loading
-   - Prioritize critical UI rendering
-   - Defer non-essential initialization
-   - Meet ≤3s cold start target on iPhone SE (2020)
+   - Implement code splitting and lazy loading for Gluestack components
+   - Prioritize critical UI rendering using Gluestack's optimized components
+   - Defer non-essential Gluestack component initialization
+   - Meet ≤3s cold start target on iPhone SE (2020) with Gluestack UI overhead considered
 
 2. Improve list rendering performance:
    - Implement virtualized lists

@@ -16,6 +16,7 @@
 - [x] Migrate to Expo project structure
 - [x] Configure conservation package as local dependency
 - [x] Set up GitHub workflow for syncing conservation package
+- [x] Install and configure Gluestack UI v2 as primary UI library
 
 ### Authentication System
 - [ ] Create user table in Supabase
@@ -44,46 +45,48 @@
 - [ ] Write tests for database operations
 - [x] Organize core data files in open/conservation/utils/data directory
 
-### UI Framework
-- [ ] Create color theme based on brand palette
-- [ ] Implement typography with Space Grotesk
-- [ ] Build button and input components
-- [ ] Create tab navigation structure
-- [ ] Implement stack navigation
-- [ ] Build loading and error states
-- [ ] Create card components for sightings
-- [ ] Implement list components
-- [ ] Build modal components
-- [ ] Create responsive layout system
-- [ ] Write tests for UI components
+### UI Framework (Gluestack UI v2)
+- [x] Install and configure Gluestack UI v2 dependencies
+- [x] Set up Gluestack theme provider with brand palette
+- [x] Configure typography with Space Grotesk in Gluestack theme
+- [ ] Customize Gluestack Button components for app variants
+- [ ] Configure Gluestack Input components with validation styling
+- [ ] Create tab navigation structure using Gluestack components
+- [ ] Implement stack navigation with Gluestack styling
+- [ ] Customize Gluestack Spinner and Alert components
+- [ ] Configure Gluestack Card components for sightings display
+- [ ] Set up Gluestack List and VStack components
+- [ ] Customize Gluestack Modal and Actionsheet components
+- [ ] Implement responsive layout using Gluestack's system
+- [ ] Write tests for customized Gluestack components
 
 ## Phase 2: Core Features
 
 ### Bird Identification Basic Setup
 - [ ] Set up camera permissions and UI
 - [ ] Implement audio recording permissions and UI
-- [ ] Create identification screen
+- [ ] Create identification screen using Gluestack layout components
 - [ ] Set up TensorFlow Lite environment
-- [ ] Implement image capture
-- [ ] Create audio capture
-- [ ] Build mock identification response
-- [ ] Create results display UI
-- [ ] Implement size comparison slider
-- [ ] Add habitat context awareness
-- [ ] Write tests for identification UI
+- [ ] Implement image capture with Gluestack UI integration
+- [ ] Create audio capture using Gluestack Button and progress components
+- [ ] Build mock identification response with Gluestack Card display
+- [ ] Create results display UI using Gluestack VStack and Badge components
+- [ ] Implement size comparison slider using Gluestack Slider component
+- [ ] Add habitat context awareness with Gluestack Alert components
+- [ ] Write tests for identification UI with Gluestack components
 
 ### Sighting Logging
 - [ ] Implement GPS location services
-- [ ] Create sighting form with species selection
-- [ ] Build media attachment handling
-- [ ] Add audio recording to sightings
-- [ ] Implement sighting list view
-- [ ] Create sighting detail view
-- [ ] Add metadata fields
-- [ ] Implement edit functionality
-- [ ] Create search and filtering
-- [ ] Add date/time filtering
-- [ ] Write tests for sighting functionality
+- [ ] Create sighting form using Gluestack form components and Select
+- [ ] Build media attachment handling with Gluestack Image and Button components
+- [ ] Add audio recording to sightings using Gluestack progress indicators
+- [ ] Implement sighting list view with Gluestack VStack and Card components
+- [ ] Create sighting detail view using Gluestack ScrollView and layout components
+- [ ] Add metadata fields using Gluestack Input and Select components
+- [ ] Implement edit functionality with Gluestack Modal and form components
+- [ ] Create search and filtering using Gluestack Input and Actionsheet
+- [ ] Add date/time filtering with Gluestack Modal and picker integration
+- [ ] Write tests for sighting functionality with Gluestack components
 
 ### Offline Capabilities
 - [ ] Set up SQLite storage
@@ -127,43 +130,43 @@
 - [ ] Test AI functionality
 
 ### User Correction System
-- [ ] Create correction UI
-- [ ] Implement species selection interface
-- [ ] Build correction data collection
-- [ ] Create user feedback mechanism
-- [ ] Build correction history view
-- [ ] Implement background sync for corrections
-- [ ] Add gamification elements
-- [ ] Create admin review tools
-- [ ] Implement correction analytics
-- [ ] Open-source correction UI components
-- [ ] Test correction workflow
+- [ ] Create correction UI using Gluestack Modal and form components
+- [ ] Implement species selection interface with Gluestack Select component
+- [ ] Build correction data collection using Gluestack form components
+- [ ] Create user feedback mechanism with Gluestack Alert and Button components
+- [ ] Build correction history view using Gluestack VStack and Card layouts
+- [ ] Implement background sync for corrections with Gluestack loading indicators
+- [ ] Add gamification elements using Gluestack Badge and progress components
+- [ ] Create admin review tools with Gluestack table-style layouts
+- [ ] Implement correction analytics with Gluestack-styled dashboard components
+- [ ] Open-source correction UI components built on Gluestack foundation
+- [ ] Test correction workflow with Gluestack component interactions
 
 ### Educational Components
-- [ ] Create species guide templates
-- [ ] Implement offline caching for guides
-- [ ] Build first-time user tutorials
-- [ ] Create contextual tips
-- [ ] Implement species spotlight feature
-- [ ] Build quiz functionality
-- [ ] Create bird call library
-- [ ] Implement migration information
-- [ ] Build location-based bird probability
-- [ ] Create field mark visualizations
-- [ ] Test educational features
+- [ ] Create species guide templates using Gluestack Card and ScrollView
+- [ ] Implement offline caching for guides with Gluestack loading states
+- [ ] Build first-time user tutorials using Gluestack Modal and progress components
+- [ ] Create contextual tips with Gluestack Popover and Alert components
+- [ ] Implement species spotlight feature using Gluestack Card and Image components
+- [ ] Build quiz functionality with Gluestack Button and progress components
+- [ ] Create bird call library using Gluestack VStack and audio controls
+- [ ] Implement migration information with Gluestack timeline-style layouts
+- [ ] Build location-based bird probability using Gluestack Badge and progress bars
+- [ ] Create field mark visualizations with Gluestack overlay components
+- [ ] Test educational features with Gluestack component interactions
 
 ### Subscription System
 - [ ] Set up Stripe integration
 - [ ] Implement RevenueCat SDK
-- [ ] Create subscription screen
-- [ ] Build payment form
-- [ ] Implement subscription checking
-- [ ] Create receipt handling
-- [ ] Build subscription management
-- [ ] Implement trial functionality
-- [ ] Create upgrade/downgrade flows
-- [ ] Set up subscription analytics
-- [ ] Test payment processing
+- [ ] Create subscription screen using Gluestack Card and VStack layouts
+- [ ] Build payment form with Stripe Elements wrapped in Gluestack components
+- [ ] Implement subscription checking with Gluestack Badge status indicators
+- [ ] Create receipt handling with Gluestack Alert confirmation components
+- [ ] Build subscription management using Gluestack Modal and form components
+- [ ] Implement trial functionality with Gluestack progress and countdown components
+- [ ] Create upgrade/downgrade flows using Gluestack Actionsheet
+- [ ] Set up subscription analytics with Gluestack-styled dashboard components
+- [ ] Test payment processing with Gluestack loading and error states
 
 ## Phase 4: Polishing & Launch
 
@@ -172,13 +175,13 @@
 - [ ] Implement screen reader support
 - [ ] Create dynamic font scaling
 - [ ] Test screen reader navigation
-- [ ] Implement focus indicators
-- [ ] Add alternative text for images
-- [ ] Build accessible forms
-- [ ] Implement gesture alternatives
-- [ ] Create accessibility documentation
-- [ ] Test with diverse users
-- [ ] Run automated accessibility tests
+- [ ] Enhance Gluestack's built-in focus indicators where needed
+- [ ] Add alternative text for images using Gluestack Image accessibility props
+- [ ] Build accessible forms leveraging Gluestack's accessibility features
+- [ ] Implement gesture alternatives using Gluestack's interaction patterns
+- [ ] Create accessibility documentation for Gluestack customizations
+- [ ] Test with diverse users using Gluestack components
+- [ ] Run automated accessibility tests on Gluestack implementations
 
 ### Performance Optimization
 - [ ] Measure and optimize startup time

@@ -6,6 +6,8 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 import React from 'react';
+import { GluestackUIProvider } from '@gluestack-ui/themed';
+import { config } from '@gluestack-ui/config';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
@@ -47,18 +49,20 @@ export default function RootLayout() {
   };
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerShown: false }}>
-          {isSignedIn ? (
-            <Stack.Screen name="(tabs)" />
-          ) : (
-            <Stack.Screen name="(auth)" />
-          )}
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
-    </AuthContext.Provider>
+    <GluestackUIProvider config={config}>
+      <AuthContext.Provider value={authContext}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack screenOptions={{ headerShown: false }}>
+            {isSignedIn ? (
+              <Stack.Screen name="(tabs)" />
+            ) : (
+              <Stack.Screen name="(auth)" />
+            )}
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </ThemeProvider>
+      </AuthContext.Provider>
+    </GluestackUIProvider>
   );
 }
