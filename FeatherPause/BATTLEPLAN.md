@@ -147,7 +147,7 @@ Now, let's break these phases down into smaller, iterative chunks.
 - Implement bird call library
 
 #### 2. Subscription System (2 weeks)
-- Integrate Stripe payment processing
+- Integrate Paddle payment processing
 - Set up RevenueCat for subscription management
 - Create subscription screens
 - Implement entitlement checking
@@ -488,12 +488,12 @@ Now, let's break these down into more detailed steps that are appropriately size
 9. Build notification system for education
 10. Add unit tests for educational features
 
-### Phase 4C: Stripe Integration
+### Phase 4C: Paddle Integration
 
-1. Add Stripe SDK dependencies
+1. Add Paddle SDK dependencies
 2. Create payment service
-3. Implement card input form
-4. Build payment processing
+3. Implement checkout flow
+4. Build subscription processing
 5. Create receipt generation
 6. Implement error handling for payments
 7. Build retry mechanism
@@ -620,7 +620,7 @@ Provide implementation of the missing elements while preserving the existing str
 
 Important: Install Gluestack UI v2 using:
 ```bash
-npm install @gluestack-ui/themed @gluestack-ui/components @gluestack-style/react
+npm install @gluestack-ui/themed @gluestack-ui/config @gluestack-style/react react-native-svg@13.4.0
 ```
 
 Configure the theme provider and basic setup before proceeding with other components.
@@ -635,9 +635,9 @@ Requirements:
 1. Set up Gluestack UI v2 with custom theme configuration:
    - Install Gluestack UI v2 and its dependencies
    - Configure brand colors in Gluestack theme:
-     - Teal (#2F5D62)
-     - Terracotta (#D36B00)
-     - Lavender (#E6E6FA)
+   - Teal (#2F5D62)
+   - Terracotta (#D36B00)
+   - Lavender (#E6E6FA)
    - Set up theme provider at app root
 
 2. Configure typography with Space Grotesk font:
@@ -860,21 +860,21 @@ Ensure all database operations are properly typed and follow consistent patterns
 ### Prompt 7: Camera and Photo Capture
 
 ```
-For the FeatherPause app, implement the camera functionality for bird photo capture. This will be used in the Identify screen to take photos for AI identification.
+For the FeatherPause app, implement the camera functionality for bird photo capture using our custom FeatherPause components. This will be used in the Identify screen to take photos for AI identification.
 
 Requirements:
-1. Create a Camera component using Expo Camera:
+1. Create a Camera component using Expo Camera with FeatherPause UI:
    - Implement permission handling for camera access
-   - Create camera preview with proper styling
-   - Add capture button and shutter animation
-   - Implement flash toggling (on/off/auto)
-   - Add front/back camera switching
+   - Create camera preview with proper styling using Gluestack Box components
+   - Add capture button using FeatherButton with custom camera variant
+   - Implement flash toggling using FeatherIconButton with flash icons
+   - Add front/back camera switching using FeatherIconButton
 
-2. Build camera controls UI:
-   - Exposure adjustment
-   - Focus controls (tap to focus)
-   - Zoom level adjustment
-   - Grid overlay toggle
+2. Build camera controls UI using FeatherPause components:
+   - Exposure adjustment with FeatherIconButton controls
+   - Focus controls (tap to focus) with visual feedback using Box overlays
+   - Zoom level adjustment with custom slider using Gluestack components
+   - Grid overlay toggle using FeatherIconButton
 
 3. Implement photo capture logic:
    - Capture high-quality images for processing
@@ -882,11 +882,11 @@ Requirements:
    - Strip EXIF data using expo-image-manipulator
    - Save photos to FileSystem with proper organization
 
-4. Create a PhotoPreview component:
-   - Display captured photo with options
-   - Add retake functionality
-   - Implement accept/continue flow
-   - Show loading state during processing
+4. Create a PhotoPreview component using FeatherPause components:
+   - Display captured photo using Gluestack Image component
+   - Add retake functionality with FeatherButton (secondary variant)
+   - Implement accept/continue flow with FeatherButton (primary variant)
+   - Show loading state using FeatherSpinner component
 
 5. Build a CameraService for business logic:
    - Handle camera initialization
@@ -910,33 +910,37 @@ Requirements:
    - Preview component functionality
    - File handling utilities
 
-Ensure the camera implementation follows the app's design language and provides a smooth user experience with proper feedback at each step.
+Ensure the camera implementation uses FeatherPause components consistently:
+- Import components from '@/src/components/ui'
+- Use FeatherButton, FeatherIconButton, FeatherIcon, and FeatherSpinner
+- Follow FeatherPause brand colors (teal, terracotta, lavender)
+- Provide smooth user experience with proper feedback using FeatherAlert for errors
 ```
 
 ### Prompt 8: Audio Recording for Bird Calls
 
 ```
-For the FeatherPause app, implement audio recording functionality for capturing bird calls. This will be used in the Identify screen as an alternative to photo identification.
+For the FeatherPause app, implement audio recording functionality for capturing bird calls using FeatherPause components. This will be used in the Identify screen as an alternative to photo identification.
 
 Requirements:
-1. Create an AudioRecorder component using Expo AV:
+1. Create an AudioRecorder component using Expo AV with FeatherPause UI:
    - Implement permission handling for microphone
-   - Build recording controls (start, stop, pause)
-   - Create visual feedback during recording
-   - Add timer display showing recording length
-   - Implement recording quality options
+   - Build recording controls using FeatherIconButton (play, pause, stop icons)
+   - Create visual feedback during recording using FeatherSpinner and pulsing animations
+   - Add timer display using Gluestack Text with monospace styling
+   - Implement recording quality options using FeatherIconButton or Select
 
-2. Build an audio visualization component:
-   - Display real-time waveform or spectrogram
-   - Provide visual feedback on audio levels
-   - Create an appealing, responsive visualization
-   - Ensure performance on lower-end devices
+2. Build an audio visualization component using Gluestack components:
+   - Display real-time waveform using custom Box components with animations
+   - Provide visual feedback on audio levels with progress bars
+   - Create an appealing, responsive visualization using VStack/HStack layouts
+   - Ensure performance on lower-end devices with optimized rendering
 
-3. Implement audio playback functionality:
-   - Controls for playing recorded audio
-   - Progress indicator during playback
-   - Volume adjustment
-   - Loop option for repeated listening
+3. Implement audio playback functionality using FeatherPause components:
+   - Controls for playing recorded audio with FeatherIconButton (play/pause)
+   - Progress indicator during playback using custom progress bar or Slider
+   - Volume adjustment using FeatherIconButton and Slider components
+   - Loop option toggle using FeatherIconButton
 
 4. Create audio processing utilities:
    - Convert to appropriate format for AI processing
@@ -967,28 +971,34 @@ Requirements:
    - Playback functionality
    - Audio processing utilities
 
-The audio recording interface should be intuitive and provide clear feedback to users about the recording process and quality.
+The audio recording interface should use FeatherPause components consistently:
+- Import components from '@/src/components/ui'
+- Use FeatherIconButton for all controls (play, pause, stop, volume)
+- Use FeatherSpinner for recording feedback and FeatherAlert for errors
+- Follow FeatherPause brand colors and provide clear feedback to users
 ```
 
 ### Prompt 9: Identify Screen Integration
 
 ```
-For the FeatherPause app, implement the Identify screen that integrates both camera and audio recording functionality. This is the main screen where users will capture bird photos or sounds for identification.
+For the FeatherPause app, implement the Identify screen using FeatherPause components that integrates both camera and audio recording functionality. This is the main screen where users will capture bird photos or sounds for identification.
 
 Requirements:
-1. Create the Identify screen with a tab interface to switch between:
-   - Photo identification (camera)
-   - Audio identification (audio recorder)
+1. Create the Identify screen with FeatherPause tab interface:
+   - Use HStack with FeatherButton variants to switch between modes
+   - Photo identification tab (camera icon using FeatherIcon)
+   - Audio identification tab (microphone icon using FeatherIcon)
+   - Active tab styling with primary colors
 
-2. Implement a unified capture flow:
-   - Common UI elements for both capture methods
-   - Consistent feedback and loading states
-   - Shared results display system
+2. Implement a unified capture flow using FeatherPause components:
+   - Common UI elements using VStack/HStack layouts
+   - Consistent feedback using FeatherSpinner for loading states
+   - Shared results display using FeatherCard components
 
-3. Build a capture guidance system:
-   - Instructional overlays for first-time users
-   - Tips for getting better identification results
-   - Context-aware suggestions based on time/location
+3. Build a capture guidance system with FeatherPause components:
+   - Instructional overlays using FeatherAlert with info variant
+   - Tips display using FeatherCard with helpful information
+   - Context-aware suggestions using FeatherAlert components
 
 4. Create a mock IdentificationService:
    - Simulate AI processing with realistic delays
@@ -996,16 +1006,16 @@ Requirements:
    - Include multiple possible species in results
    - Vary response times to test loading states
 
-5. Implement the results display component:
-   - Show identified species with confidence level
-   - Display alternative possibilities
-   - Show size comparison information
-   - Include conservation status indicators
+5. Implement the results display using FeatherPause components:
+   - Show identified species using FeatherCard with confidence badges
+   - Display alternative possibilities using VStack of FeatherCard components
+   - Show size comparison information using custom components
+   - Include conservation status using FeatherBadge with appropriate colors
 
-6. Build the correction interface:
-   - Allow users to confirm or correct identification
-   - Provide species selection for corrections
-   - Implement submission of corrections
+6. Build the correction interface using FeatherPause components:
+   - Allow users to confirm using FeatherButton (success variant)
+   - Provide species selection using Select or Modal with search
+   - Implement correction submission using FeatherButton with loading states
 
 7. Create a history of recent identifications:
    - Save recent identifications locally
@@ -1023,7 +1033,11 @@ Requirements:
    - Results display with various data
    - Error state handling
 
-The Identify screen should provide a seamless experience regardless of which identification method the user chooses, with clear guidance and feedback throughout the process.
+The Identify screen should use FeatherPause components consistently:
+- Import all components from '@/src/components/ui'
+- Use FeatherButton for tabs and actions, FeatherCard for results display
+- Use FeatherSpinner for loading, FeatherAlert for guidance and errors
+- Follow FeatherPause brand colors and provide seamless experience with clear feedback
 ```
 
 ### Prompt 10: Size Comparison Slider
@@ -1086,16 +1100,16 @@ The Size Comparison Slider should be visually appealing while providing valuable
 ### Prompt 11: Sighting Form Implementation
 
 ```
-For the FeatherPause app, implement the sighting form using Gluestack UI v2 form components. This form will be used both for manual entries and for saving identifications from the Identify screen.
+For the FeatherPause app, implement the sighting form using FeatherPause components. This form will be used both for manual entries and for saving identifications from the Identify screen.
 
 Requirements:
-1. Create a SightingForm component using Gluestack UI v2 form components with fields for:
-   - Bird species (searchable selection)
-   - Date and time (with date/time picker)
-   - Location (GPS coordinates with map preview)
-   - Notes (multiline text input)
-   - Photos/audio attachments
-   - Conservation status indicator (read-only, based on species)
+1. Create a SightingForm component using FeatherPause form components with fields for:
+   - Bird species (searchable selection using FeatherInput with search)
+   - Date and time (using FeatherInput with date/time picker integration)
+   - Location (GPS coordinates with map preview using FeatherInput and Box)
+   - Notes (multiline text using FeatherInput with multiline support)
+   - Photos/audio attachments (using custom attachment components)
+   - Conservation status indicator (read-only, using FeatherBadge)
 
 2. Implement form validation:
    - Required field validation
@@ -1103,29 +1117,29 @@ Requirements:
    - Date/time validation (no future dates)
    - File type and size validation for attachments
 
-3. Build a species selection component using Gluestack Select:
-   - Searchable dropdown using Gluestack Select component
-   - Recent/common species quick selection with Gluestack ActionsheetItem
-   - Grouping by taxonomy or habitat using Gluestack Divider
-   - Conservation status indicators using Gluestack Badge components
+3. Build a species selection component using FeatherPause components:
+   - Searchable dropdown using FeatherInput with search functionality
+   - Recent/common species quick selection with FeatherButton variants
+   - Grouping by taxonomy or habitat using VStack with dividers
+   - Conservation status indicators using FeatherBadge components
 
-4. Create a location picker component using Gluestack components:
-   - Current GPS location display using Gluestack Box and Text
-   - Manual map selection with Gluestack Modal integration
-   - Location names display using Gluestack Input with suggestions
-   - Recent locations using Gluestack Actionsheet
+4. Create a location picker component using FeatherPause components:
+   - Current GPS location display using FeatherInput with location icon
+   - Manual map selection with Modal integration
+   - Location names display using FeatherInput with suggestions
+   - Recent locations using Actionsheet with FeatherButton items
 
-5. Implement media attachment handling:
-   - Photo thumbnail previews
-   - Audio playback controls
-   - Adding multiple attachments
-   - Removing individual attachments
+5. Implement media attachment handling using FeatherPause components:
+   - Photo thumbnail previews using Image with FeatherIconButton overlays
+   - Audio playback controls using FeatherIconButton (play/pause/stop)
+   - Adding multiple attachments with FeatherButton (outline variant)
+   - Removing individual attachments using FeatherIconButton (danger variant)
 
-6. Build submission handling:
-   - Save to local database
+6. Build submission handling with FeatherPause feedback:
+   - Save to local database with FeatherSpinner during processing
    - Queue for sync to Supabase when online
-   - Handle submission errors gracefully
-   - Show success confirmation
+   - Handle submission errors using FeatherAlert (error variant)
+   - Show success confirmation using FeatherAlert (success variant)
 
 7. Create an edit mode for existing sightings:
    - Load existing data into form
@@ -1145,7 +1159,12 @@ Requirements:
    - Edit functionality
    - UI rendering with different data
 
-The sighting form should be intuitive and efficient, guiding users through the process while allowing for both quick entries and detailed documentation.
+The sighting form should use FeatherPause components consistently:
+- Import all components from '@/src/components/ui'
+- Use FeatherInput for all form fields with proper validation styling
+- Use FeatherButton for actions (primary for submit, secondary for cancel)
+- Use FeatherAlert for validation errors and success messages
+- Follow FeatherPause brand colors and provide intuitive, efficient user experience
 ```
 
 ### Prompt 12: Logbook Implementation
@@ -1507,13 +1526,13 @@ The Learn screen should be engaging and educational, providing value to birders 
 ### Prompt 18: Subscription and Payment Processing
 
 ```
-For the FeatherPause app, implement the subscription system using Gluestack UI v2 components with Stripe and RevenueCat for the $6.99/month subscription-only model.
+For the FeatherPause app, implement the subscription system using Gluestack UI v2 components with Paddle and RevenueCat for the $6.99/month subscription-only model.
 
 Requirements:
-1. Set up Stripe integration:
-   - Create Stripe client configuration
+1. Set up Paddle integration:
+   - Create Paddle client configuration
    - Implement secure API key handling
-   - Build payment processing service
+   - Build subscription processing service
    - Create webhook handling for events
 
 2. Implement RevenueCat for subscription management:
@@ -1524,7 +1543,7 @@ Requirements:
 
 3. Build subscription UI using Gluestack components:
    - Create subscription screen using Gluestack Card and VStack layouts
-   - Implement payment form with Stripe Elements wrapped in Gluestack components
+   - Implement checkout flow with Paddle Checkout wrapped in Gluestack components
    - Build subscription success confirmation using Gluestack Alert
    - Create loading states with Gluestack Spinner and error states with Gluestack Alert
 

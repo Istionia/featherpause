@@ -165,4 +165,4 @@ export interface IdentificationResult {
     actualSpeciesId: string;
     timestamp: string;
   };
-}
+} 

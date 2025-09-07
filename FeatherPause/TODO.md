@@ -156,10 +156,10 @@
 - [ ] Test educational features with Gluestack component interactions
 
 ### Subscription System
-- [ ] Set up Stripe integration
+- [ ] Set up Paddle integration
 - [ ] Implement RevenueCat SDK
 - [ ] Create subscription screen using Gluestack Card and VStack layouts
-- [ ] Build payment form with Stripe Elements wrapped in Gluestack components
+- [ ] Build checkout flow with Paddle Checkout wrapped in Gluestack components
 - [ ] Implement subscription checking with Gluestack Badge status indicators
 - [ ] Create receipt handling with Gluestack Alert confirmation components
 - [ ] Build subscription management using Gluestack Modal and form components

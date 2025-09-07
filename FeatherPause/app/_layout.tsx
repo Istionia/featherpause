@@ -3,27 +3,20 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import 'react-native-reanimated';
-import React from 'react';
+import React, { useContext } from 'react';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { config } from '@gluestack-ui/config';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { AuthContext, AuthProvider } from '@/src/contexts/AuthContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-// Simple auth context - in a real app, this would be more robust
-export const AuthContext = React.createContext({
-  isSignedIn: false,
-  signIn: () => {},
-  signOut: () => {},
-});
-
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -38,31 +31,24 @@ export default function RootLayout() {
     return null;
   }
 
-  const authContext = {
-    isSignedIn,
-    signIn: () => {
-      setIsSignedIn(true);
-    },
-    signOut: () => {
-      setIsSignedIn(false);
-    },
+  const AppNavigator = () => {
+    const { isSignedIn } = useContext(AuthContext);
+    return (
+      <Stack screenOptions={{ headerShown: false }}>
+        {isSignedIn ? <Stack.Screen name="(tabs)" /> : <Stack.Screen name="(auth)" />}
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    );
   };
 
   return (
     <GluestackUIProvider config={config}>
-      <AuthContext.Provider value={authContext}>
+      <AuthProvider>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack screenOptions={{ headerShown: false }}>
-            {isSignedIn ? (
-              <Stack.Screen name="(tabs)" />
-            ) : (
-              <Stack.Screen name="(auth)" />
-            )}
-            <Stack.Screen name="+not-found" />
-          </Stack>
+          <AppNavigator />
           <StatusBar style="auto" />
         </ThemeProvider>
-      </AuthContext.Provider>
+      </AuthProvider>
     </GluestackUIProvider>
   );
 }

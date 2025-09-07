@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router';
 import React, { useContext, useState } from 'react';
 
-import { AuthContext } from '../_layout';
+import { AuthContext } from '@/src/contexts/AuthContext';
 import {
   SafeAreaView,
   VStack,
@@ -14,10 +14,11 @@ import {
   FeatherInput,
   FeatherButton,
   FeatherIcon,
+  FeatherAlert,
 } from '@/src/components/ui';
 
 export default function LoginScreen() {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loading, error, clearError } = useContext(AuthContext);
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,7 +78,14 @@ export default function LoginScreen() {
             <FeatherButton
               variant="primary"
               size="lg"
-              onPress={signIn}
+              isLoading={loading}
+              onPress={async () => {
+                try {
+                  await signIn(email, password);
+                } catch (e) {
+                  // handled via context error
+                }
+              }}
               mt="$4"
             >
               Sign In
@@ -101,6 +109,16 @@ export default function LoginScreen() {
             </Button>
           </HStack>
         </VStack>
+        {error && (
+          <Box mt="$4" width="$full">
+            <FeatherAlert
+              variant="error"
+              title="Sign in failed"
+              description={error}
+              action={{ text: 'Dismiss', onPress: clearError }}
+            />
+          </Box>
+        )}
       </Box>
     </SafeAreaView>
   );

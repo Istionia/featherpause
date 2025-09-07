@@ -38,7 +38,7 @@
 - **Frontend**: React Native + Expo (TypeScript).  
 - **AI/ML**: TensorFlow Lite (on-device), SageMaker (cloud retraining).  
 - **Backend**: Supabase (PostgreSQL, Auth, Storage).  
-- **Payments**: Stripe + RevenueCat (closed-source).  
+- **Payments**: Paddle + RevenueCat (closed-source).  
 - **Mapping**: Mapbox GL Native.  
 
 ### Hybrid Licensing
@@ -59,7 +59,7 @@ CREATE TABLE users (
   id UUID PRIMARY KEY,
   email TEXT UNIQUE,
   is_pro BOOLEAN DEFAULT false,
-  stripe_customer_id TEXT
+  paddle_customer_id TEXT
 );
 
 -- Sightings
@@ -149,7 +149,7 @@ CREATE TABLE sightings (
 |-------------------------|--------------------------------------------|-------------------------------------|
 | GPS Failure             | "Enable location services for accurate IDs." | Fallback to manual region select.  |
 | AI Timeout              | "Hmm, that took too long. Try moving closer." | Queue for background processing.   |
-| Payment Decline         | "Payment failed. Update card in settings."  | Retry with Stripe Smart Retries.    |
+| Payment Decline         | "Payment failed. Update payment method."    | Retry with Paddle Smart Retries.    |
 
 ### Logging
 - **Sentry**: Capture frontend exceptions.  
@@ -163,7 +163,7 @@ CREATE TABLE sightings (
 |-----------------------|---------------------------------------------|----------------------|
 | **AI Accuracy**       | Validate ID accuracy against Cornell's Merlin test suite. | Custom scripts      |
 | **Offline Mode**      | Disable Wi-Fi/cellular; test logging/ID.    | Android ADB, Xcode  |
-| **Payment Flow**      | Test successful/failed subscriptions.       | Stripe Test Mode     |
+| **Payment Flow**      | Test successful/failed subscriptions.       | Paddle Sandbox Mode  |
 
 ### Performance Testing
 - **Cold Start**: ≤3s on iPhone SE (2020).  
@@ -198,7 +198,7 @@ CREATE TABLE sightings (
 
 **Next Steps**:  
 1. Set up Supabase project with RLS policies.  
-2. Implement Stripe CardForm + RevenueCat entitlements.  
+2. Implement Paddle Checkout + RevenueCat entitlements.  
 3. Train initial TensorFlow Lite models.  
 4. Publish open-source modules on GitHub (AGPLv3).  
 

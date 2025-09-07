@@ -1,89 +1,75 @@
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '@/src/contexts/AuthContext';
+import {
+  SafeAreaView,
+  VStack,
+  Heading,
+  Text,
+  Box,
+  FeatherInput,
+  FeatherButton,
+  FeatherAlert,
+} from '@/src/components/ui';
 
 export default function ForgotPasswordScreen() {
-  const colorScheme = useColorScheme();
   const router = useRouter();
+  const { resetPassword, loading, error, clearError } = useContext(AuthContext);
+  const [email, setEmail] = useState('');
 
   const goToLogin = () => {
     router.navigate('../login');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { color: Colors[colorScheme ?? 'light'].text }]}>
-        Reset Password
-      </Text>
-      <Text style={[styles.subtitle, { color: Colors[colorScheme ?? 'light'].text }]}>
-        Enter your email address, and we'll send you a link to reset your password.
-      </Text>
+    <SafeAreaView flex={1} bg="$backgroundLight0">
+      <Box flex={1} justifyContent="center" px="$6">
+        <VStack space="xl" alignItems="center">
+          <Heading size="2xl" color="$primary700">Reset Password</Heading>
+          <Text color="$textLight600" textAlign="center">
+            Enter your email address, and we'll send you a link to reset your password.
+          </Text>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: Colors[colorScheme ?? 'light'].background },
-            { color: Colors[colorScheme ?? 'light'].text },
-          ]}
-          placeholder="Email"
-          placeholderTextColor="#A0A0A0"
-          autoCapitalize="none"
-        />
-      </View>
+          <VStack space="lg" width="$full">
+            <FeatherInput
+              label="Email"
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={setEmail}
+              type="email"
+              isRequired
+            />
+            <FeatherButton
+              variant="primary"
+              size="lg"
+              isLoading={loading}
+              onPress={async () => {
+                try {
+                  await resetPassword(email);
+                  router.replace('../login');
+                } catch {}
+              }}
+            >
+              Send Reset Link
+            </FeatherButton>
+          </VStack>
 
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].tint }]}>
-        <Text style={styles.buttonText}>Send Reset Link</Text>
-      </TouchableOpacity>
+          <FeatherButton variant="ghost" onPress={goToLogin}>Back to Sign In</FeatherButton>
 
-      <View style={styles.footer}>
-        <TouchableOpacity onPress={goToLogin}>
-          <Text style={{ color: Colors[colorScheme ?? 'light'].tint }}>Back to Sign In</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          {error && (
+            <Box mt="$4" width="$full">
+              <FeatherAlert
+                variant="error"
+                title="Reset failed"
+                description={error}
+                action={{ text: 'Dismiss', onPress: clearError }}
+              />
+            </Box>
+          )}
+        </VStack>
+      </Box>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    marginBottom: 30,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  input: {
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 15,
-  },
-  button: {
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  footer: {
-    alignItems: 'center',
-  },
-}); 
+const styles = {} as const;

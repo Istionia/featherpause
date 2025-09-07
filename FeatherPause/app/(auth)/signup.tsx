@@ -1,104 +1,101 @@
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import React, { useContext, useState } from 'react';
+import { AuthContext } from '@/src/contexts/AuthContext';
+import {
+  SafeAreaView,
+  VStack,
+  Heading,
+  Text,
+  Box,
+  FeatherInput,
+  FeatherButton,
+  FeatherAlert,
+} from '@/src/components/ui';
 
 export default function SignupScreen() {
-  const colorScheme = useColorScheme();
   const router = useRouter();
+  const { signUp, loading, error, clearError } = useContext(AuthContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [localError, setLocalError] = useState<string | undefined>(undefined);
 
   const goToLogin = () => {
     router.navigate('../login');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title, { color: Colors[colorScheme ?? 'light'].text }]}>
-        Create Account
-      </Text>
+    <SafeAreaView flex={1} bg="$backgroundLight0">
+      <Box flex={1} justifyContent="center" px="$6">
+        <VStack space="xl" alignItems="center">
+          <Heading size="2xl" color="$primary700">Create Account</Heading>
 
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: Colors[colorScheme ?? 'light'].background },
-            { color: Colors[colorScheme ?? 'light'].text },
-          ]}
-          placeholder="Email"
-          placeholderTextColor="#A0A0A0"
-          autoCapitalize="none"
-        />
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: Colors[colorScheme ?? 'light'].background },
-            { color: Colors[colorScheme ?? 'light'].text },
-          ]}
-          placeholder="Password"
-          placeholderTextColor="#A0A0A0"
-          secureTextEntry
-        />
-        <TextInput
-          style={[
-            styles.input,
-            { backgroundColor: Colors[colorScheme ?? 'light'].background },
-            { color: Colors[colorScheme ?? 'light'].text },
-          ]}
-          placeholder="Confirm Password"
-          placeholderTextColor="#A0A0A0"
-          secureTextEntry
-        />
-      </View>
+          <VStack space="lg" width="$full">
+            <FeatherInput
+              label="Email"
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={setEmail}
+              type="email"
+              isRequired
+            />
+            <FeatherInput
+              label="Password"
+              placeholder="Enter your password"
+              value={password}
+              onChangeText={setPassword}
+              type="password"
+              isRequired
+            />
+            <FeatherInput
+              label="Confirm Password"
+              placeholder="Re-enter your password"
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+              type="password"
+              isRequired
+              isInvalid={!!localError}
+              errorMessage={localError}
+            />
 
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: Colors[colorScheme ?? 'light'].tint }]}>
-        <Text style={styles.buttonText}>Create Account</Text>
-      </TouchableOpacity>
+            <FeatherButton
+              variant="primary"
+              size="lg"
+              isLoading={loading}
+              onPress={async () => {
+                if (password !== confirmPassword) {
+                  setLocalError('Passwords do not match');
+                  return;
+                }
+                setLocalError(undefined);
+                try {
+                  await signUp(email, password);
+                  router.replace('../login');
+                } catch {}
+              }}
+              mt="$2"
+            >
+              Create Account
+            </FeatherButton>
+          </VStack>
 
-      <View style={styles.footer}>
-        <Text style={{ color: Colors[colorScheme ?? 'light'].text }}>Already have an account? </Text>
-        <TouchableOpacity onPress={goToLogin}>
-          <Text style={{ color: Colors[colorScheme ?? 'light'].tint }}>Sign In</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+          <Text color="$textLight600">Already have an account?</Text>
+          <FeatherButton variant="ghost" onPress={goToLogin}>Sign In</FeatherButton>
+
+          {(error || localError) && (
+            <Box mt="$4" width="$full">
+              <FeatherAlert
+                variant="error"
+                title="Signup failed"
+                description={error ?? localError}
+                action={{ text: 'Dismiss', onPress: () => { clearError(); setLocalError(undefined); } }}
+              />
+            </Box>
+          )}
+        </VStack>
+      </Box>
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 30,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  input: {
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 15,
-  },
-  button: {
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-}); 
+const styles = StyleSheet.create({});
